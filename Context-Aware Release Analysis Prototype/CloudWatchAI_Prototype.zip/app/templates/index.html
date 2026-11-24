@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CloudWatch AI – Cloud Service Change Analyst</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">CW</div>
+          <div><strong>CloudWatch AI</strong><span>CHANGE ANALYST</span></div>
+        </div>
+        <nav>
+          <button type="button" class="nav active" data-view="overview">◈ Overview</button
+          ><button type="button" class="nav" data-view="updates">▤ Cloud updates</button
+          ><button type="button" class="nav" data-view="digest">✦ Release digest</button
+          ><button type="button" class="nav" data-view="ask">? Ask a question</button
+          ><button type="button" class="nav" data-view="memory">◉ Team memory</button
+          ><button type="button" class="nav" data-view="evaluation">⌁ Evaluation</button>
+        </nav>
+        <div class="side-bottom">
+          <div class="status-dot"></div>
+          <span id="sideStatus">Ready</span><small>LOCAL WORKSPACE</small>
+        </div>
+      </aside>
+      <main>
+        <header class="topbar">
+          <div>
+            <span class="eyebrow">CLOUD INTELLIGENCE / MONITORING</span>
+            <h1 id="pageTitle">Overview</h1>
+          </div>
+          <div class="top-actions">
+            <span class="mode-tag" id="modeTag">DEMO MODE</span
+            ><button type="button" class="button primary" id="collectBtn">
+              ↻ Collect updates
+            </button>
+          </div>
+        </header>
+<div class="banner" id="modeBanner" role="status"></div>
+        <section class="view active" id="overview">
+          <div class="hero">
+            <div>
+              <span class="eyebrow">CHANGE AWARENESS</span>
+              <h2>Know what changed.<br /><em>Understand what matters.</em></h2>
+              <p>
+                Monitor public cloud updates and connect them to your team's
+                services, projects and decisions.
+              </p>
+              <button type="button" class="button light" onclick="switchView('updates')">
+                Explore collected updates ↗
+              </button>
+            </div>
+            <div class="hero-art">
+              <div class="orbit orbit1"></div>
+              <div class="orbit orbit2"></div>
+              <div class="orbit orbit3"></div>
+              <div class="core">CW<span>AI</span></div>
+              <div class="orbit-label ol1">COLLECT</div>
+              <div class="orbit-label ol2">CONTEXT</div>
+              <div class="orbit-label ol3">ANALYZE</div>
+            </div>
+          </div>
+          <div class="metrics">
+            <div class="metric">
+              <span>UPDATES IN SESSION</span
+              ><strong id="metricUpdates">0</strong
+              ><small>Collected and processed</small>
+            </div>
+            <div class="metric">
+              <span>MEMORY RECORDS</span><strong id="metricMemory">0</strong
+              ><small>Historical context saved</small>
+            </div>
+            <div class="metric">
+              <span>HIGH PRIORITY</span><strong id="metricHigh">—</strong
+              ><small>After digest analysis</small>
+            </div>
+            <div class="metric">
+              <span>COLLECTION MODE</span
+              ><strong class="smallMetric" id="metricMode">DEMO</strong
+              ><small>Live or illustrative data</small>
+            </div>
+          </div>
+          <div class="section-grid">
+            <div class="panel">
+              <div class="panel-head">
+                <div>
+                  <span class="eyebrow">PIPELINE</span>
+                  <h3>Workflow status</h3>
+                </div>
+                <span class="badge">7 STAGES</span>
+              </div>
+              <div class="pipeline">
+                <div class="stage">
+                  <b>01</b><span>Official sources</span
+                  ><small>AWS · Azure · Google Cloud</small>
+                </div>
+                <div class="stage">
+                  <b>02</b><span>Firecrawl collection</span
+                  ><small>Web extraction</small>
+                </div>
+                <div class="stage">
+                  <b>03</b><span>Pandas processing</span
+                  ><small>Normalize & classify</small>
+                </div>
+                <div class="stage">
+                  <b>04</b><span>Team memory</span
+                  ><small>Local SQLite · keyword search</small>
+                </div>
+                <div class="stage">
+                  <b>05</b><span>LLM analysis</span
+                  ><small>Impact reasoning</small>
+                </div>
+                <div class="stage">
+                  <b>06</b><span>Priority digest</span
+                  ><small>Team relevance</small>
+                </div>
+                <div class="stage">
+                  <b>07</b><span>Review</span><small>Engineer validation</small>
+                </div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-head">
+                <div>
+                  <span class="eyebrow">TEAM CONTEXT</span>
+                  <h3>Personalization profile</h3>
+                </div>
+              </div>
+              <label
+                >Team name<input
+                  id="teamName" maxlength="100"
+                  value="Cloud Platform Team" /></label
+              ><label
+                >Services / technologies<input
+                  id="teamServices"
+                  value="AWS, Azure, Google Cloud, Kubernetes, Terraform" /></label
+              ><label
+                >Projects<input
+                  id="teamProjects"
+                  value="cloud migration, container platform, observability" /></label
+              ><label
+                >Additional context<textarea
+                  id="teamContext" maxlength="2000"
+                  placeholder="Architecture, decisions, constraints…"
+                ></textarea></label
+              ><button type="button" class="button secondary" id="saveProfile">
+                Save profile
+              </button>
+            </div>
+          </div>
+        </section>
+        <section class="view" id="updates">
+          <div class="toolbar">
+            <input
+              id="searchUpdates"
+              placeholder="Search updates, services, keywords…"
+            /><select id="providerFilter">
+              <option value="">All providers</option>
+              <option>AWS</option>
+              <option>Azure</option>
+              <option>Google Cloud</option></select
+            ><select id="categoryFilter">
+              <option value="">All categories</option>
+              <option>pricing</option>
+              <option>deprecation</option>
+              <option>security</option>
+              <option>availability</option>
+              <option>maintenance</option>
+              <option>service_update</option>
+              <option>source_collection</option>
+            </select>
+          </div>
+          <div id="updatesList" class="update-list empty-state">
+            Collect updates to populate this view.
+          </div>
+        </section>
+        <section class="view" id="digest">
+          <div class="digest-intro">
+            <div>
+              <span class="eyebrow">CONTEXT-AWARE SUMMARY</span>
+              <h2>Your team's signal, not the noise.</h2>
+              <p>
+                Analyze collected changes against your team profile and
+                historical memory.
+              </p>
+            </div>
+            <button type="button" class="button primary" id="generateDigest">
+              ✦ Generate digest
+            </button>
+          </div>
+          <div id="digestResult" class="empty-state">
+            Generate a digest after collecting updates.
+          </div>
+        </section>
+        <section class="view" id="ask">
+          <div class="digest-intro">
+            <div>
+              <span class="eyebrow">QUESTION ANSWERING</span>
+              <h2>Ask about the collected updates.</h2>
+              <p>
+                Answers use only the collected updates and your saved team
+                context, with numbered sources.
+              </p>
+            </div>
+          </div>
+          <div class="ask-box">
+            <label for="askQuestion">Your question</label>
+            <textarea id="askQuestion" maxlength="500" rows="3"
+              placeholder="e.g. Which updates affect our Kubernetes work?"></textarea>
+            <div class="chip-row" id="askExamples">
+              <button type="button" class="chip example" data-q="Which updates affect our Kubernetes work?">Which updates affect our Kubernetes work?</button>
+              <button type="button" class="chip example" data-q="Are there any deprecations or retirements?">Are there any deprecations or retirements?</button>
+              <button type="button" class="chip example" data-q="What should we worry about first?">What should we worry about first?</button>
+            </div>
+            <button type="button" class="button primary" id="askBtn">Ask</button>
+          </div>
+          <div id="askResult" class="empty-state">
+            Collect updates, then ask a question.
+          </div>
+        </section>
+        <section class="view" id="memory">
+          <div class="memory-head">
+            <div>
+              <span class="eyebrow">PERSISTENT CONTEXT</span>
+              <h2>Team memory</h2>
+              <p>Previous evaluations and organizational context.</p>
+            </div>
+          </div>
+          <div class="memory-form panel">
+            <label
+              >Memory title<input
+                id="memoryTitle" maxlength="150"
+                placeholder="e.g. Production workloads run on EKS" /></label
+            ><label
+              >Context<textarea
+                id="memoryContent" maxlength="4000"
+                placeholder="Architecture fact, decision, impact, constraint…"
+              ></textarea></label
+            ><label
+              >Related services<input
+                id="memoryServices"
+                placeholder="EKS, EC2, Terraform" /></label
+            ><button type="button" class="button secondary" id="addMemory">
+              + Save context
+            </button>
+          </div>
+          <h3 class="list-title">Team context <small>entered by you</small></h3>
+          <div id="contextList" class="memory-list empty-state">No team context saved yet.</div>
+          <h3 class="list-title">Past analyses <small>generated by this app · not verified facts</small></h3>
+          <div id="analysisList" class="memory-list empty-state">No analyses saved yet.</div>
+        </section>
+        <section class="view" id="evaluation">
+          <div class="metrics" id="evaluationMetrics"></div>
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <span class="eyebrow">MEASUREMENT</span>
+                <h3>Evaluation notes</h3>
+              </div>
+            </div>
+            <p>
+              Collection metrics help assess workflow operation. They do not
+              prove impact-analysis accuracy. Review results against official
+              sources and a human-labelled test set.
+            </p>
+            <div id="evaluationBreakdown"></div>
+          </div>
+        </section>
+        <footer>
+          CloudWatch AI
+          <span
+            >Research prototype · Validate against official provider
+            sources.</span
+          >
+        </footer>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

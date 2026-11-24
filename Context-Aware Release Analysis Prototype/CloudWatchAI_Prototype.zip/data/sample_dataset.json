@@ -1,0 +1,39 @@
+[
+  {
+    "provider": "AWS",
+    "title": "Illustrative EC2 update",
+    "summary": "Sample only: review instance family compatibility and availability.",
+    "content": "Illustrative demo item about EC2 instance changes; verify official details.",
+    "url": "https://aws.amazon.com/new/",
+    "category": "service_update",
+    "services": [
+      "EC2"
+    ],
+    "is_demo": true
+  },
+  {
+    "provider": "Azure",
+    "title": "Illustrative Azure retirement notice",
+    "summary": "Sample only: evaluate migration planning for a retired feature.",
+    "content": "Illustrative demo item about deprecation and migration planning.",
+    "url": "https://azure.microsoft.com/en-us/updates/",
+    "category": "deprecation",
+    "services": [
+      "Azure"
+    ],
+    "is_demo": true
+  },
+  {
+    "provider": "Google Cloud",
+    "title": "Illustrative GKE version notice",
+    "summary": "Sample only: verify supported versions and compatibility.",
+    "content": "Illustrative demo item about Kubernetes version support.",
+    "url": "https://cloud.google.com/release-notes",
+    "category": "availability",
+    "services": [
+      "GKE",
+      "Kubernetes"
+    ],
+    "is_demo": true
+  }
+]

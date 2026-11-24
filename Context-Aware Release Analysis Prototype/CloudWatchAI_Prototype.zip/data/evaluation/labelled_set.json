@@ -1,0 +1,15 @@
+{
+  "instructions": "Fill expected_category and expected_priority yourself (a human judgement, ideally by two team members), using the profile below. Use null to skip an item. Priority values: High, Medium, Low. Add your own items by copying one entry and using the exact title of a collected update.",
+  "team_profile": {
+    "team_name": "Cloud Platform Team",
+    "services": ["AWS", "Azure", "Google Cloud", "Kubernetes", "Terraform"],
+    "projects": ["cloud migration", "container platform", "observability"]
+  },
+  "items": [
+    {"title": "Illustrative: Amazon EC2 instance family update", "expected_category": null, "expected_priority": null},
+    {"title": "Illustrative: Azure database maintenance notice", "expected_category": null, "expected_priority": null},
+    {"title": "Illustrative: Kubernetes platform version notice", "expected_category": null, "expected_priority": null},
+    {"title": "Illustrative: Cloud pricing information updated", "expected_category": null, "expected_priority": null},
+    {"title": "Illustrative: Service retirement warning", "expected_category": null, "expected_priority": null}
+  ]
+}
